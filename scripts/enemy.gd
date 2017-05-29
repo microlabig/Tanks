@@ -22,14 +22,14 @@ var target_pos = Vector2()
 #--------------------------------------------------
 func _ready():
 	target_pos = Vector2(10,10) #цель	
-	set_linear_damp(10.0) #для притормаживания (эффект "не постоянного" торможения)
+	set_linear_damp(10.0) #для притормаживания (эффект "не постоянного" торможения) 
 	set_fixed_process(true)	 #создадим процесс для просчета физики и запустим его	
 	pass		
 
 func _fixed_process( delta ):	
-	rotate_enemy(45,delta)
+	rotate_enemy(90,delta)
 	if Input.is_action_pressed("ui_up"):
-		rotate_enemy_gun(180-45, delta)
+		rotate_enemy_gun(90, delta)
 		if not gun_timer.get_time_left():	
 			shoot(delta)
 	#find_target(target_pos)
@@ -66,7 +66,6 @@ func rotate_enemy(degree, delta):
 	current_rot = deg2rad(degree)
 	var rot = lerp(rot, current_rot, delta)
 	set_rot(rot)
-	#set_angular_velocity(rot)
 	pass
 	
 #стрельба
