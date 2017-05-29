@@ -17,7 +17,7 @@ export var rot_degree = 1
 export (PackedScene) var bullet
 onready var bullet_container = get_node("bullet_container")
 onready var gun_timer = get_node("gun_timer")
-onready var shoot_sound = get_node("shoot")
+#onready var shoot_sound = get_node("shoot")
 var smoke = preload("res://scenes/smoke.tscn")
 
 
@@ -25,9 +25,12 @@ var current_speed = 0
 var current_rot = 0.0
 var rot = 0.0
  
-func _ready():
-        # Initalization here
-        set_fixed_process(true)
+#--------------------------------------------------
+#--------------------------------------------------
+#--------------------------------------------------
+func _ready():        
+	set_fixed_process(true)
+	pass
 
 func _fixed_process( delta ):
 	if Input.is_action_pressed("ui_shoot"):
@@ -49,10 +52,12 @@ func _fixed_process( delta ):
 		move(run_speed*0.5,acceleration,delta)
 	elif move_up.check() == 0 and move_down.check() == 0:
 		move(0,deceleration,delta)
-		
-### apply the speed vector to the velocity     
+		   
 	set_linear_velocity(Vector2(0,current_speed).rotated(get_rot()))
-   
+#--------------------------------------------------
+#--------------------------------------------------
+#--------------------------------------------------   
+
 func move(speed, acceleration, delta):
 	current_speed = lerp(current_speed, speed, acceleration*delta)
 
@@ -67,7 +72,7 @@ func shoot():
 	bullet_container.add_child(sm)
 	sm.set_pos(pos)
 	sm.play()
-	shoot_sound.play("gun")
+#	shoot_sound.play("gun")
 
 func rotate_player(degree,delta):
 	current_rot += deg2rad(degree)
