@@ -17,7 +17,7 @@ export var rot_degree = 1
 export (PackedScene) var bullet
 onready var bullet_container = get_node("bullet_container")
 onready var gun_timer = get_node("gun_timer")
-onready var shoot_sound = get_node("shoot")
+#onready var shoot_sound = get_node("shoot")
 var smoke = preload("res://scenes/smoke.tscn")
 
 
@@ -67,7 +67,7 @@ func shoot():
 	bullet_container.add_child(sm)
 	sm.set_pos(pos)
 	sm.play()
-	shoot_sound.play("gun")
+#	shoot_sound.play("gun")
 
 func rotate_player(degree,delta):
 	current_rot += deg2rad(degree)
