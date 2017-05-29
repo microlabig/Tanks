@@ -82,4 +82,6 @@ bias/bias = 0.0
 collision/exclude_nodes = true
 softness = 0.0
 
+[connection signal="timeout" from="gun_timer" to="." method="_on_gun_timer_timeout"]
+
 

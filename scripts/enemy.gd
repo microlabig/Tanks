@@ -11,9 +11,8 @@ onready var gun_timer = get_node("gun_timer")
 
 var smoke = preload("res://scenes/smoke.tscn")
 
-var current_speed = 0 #текущая скорость
+var current_speed = 0.0 #текущая скорость
 var current_rot = 0.0 #текущий поворот
-#var current_rot_gun = 0.0 #текущий поворот пушки
 var linear_damp = 0.0 #для отдачи и отскоков
 
 var target_pos = Vector2()
@@ -28,9 +27,9 @@ func _ready():
 	pass		
 
 func _fixed_process( delta ):	
-	rotate_enemy(90,delta)
+	rotate_enemy(45,delta)
 	if Input.is_action_pressed("ui_up"):
-		rotate_enemy_gun(180, delta)
+		rotate_enemy_gun(180-45, delta)
 		if not gun_timer.get_time_left():	
 			shoot(delta)
 	#find_target(target_pos)
@@ -39,9 +38,7 @@ func _fixed_process( delta ):
 	else:
 		pass
 		move_enemy(speed, delta)
-		#print("speed= ",speed," cs= ",current_speed)
-	#print("mass = ", get_mass()," cur_speed = ", current_speed, " linear_damp = ", linear_damp)
-	#print("g_lv = ", get_linear_velocity())	
+		print("speed= ",abs(speed)-abs(current_speed)," ",current_speed)
 	pass
 #--------------------------------------------------
 #--------------------------------------------------
@@ -50,7 +47,7 @@ func _fixed_process( delta ):
 #установим линейную скорость перемещения и вращение
 #если скорость sp положительна - движение вперед, отрицательна - назад
 func move_enemy(sp, delta):	
-	sp *= -1
+	sp *= -1	
 	if sp<=0:
 		current_speed = lerp(current_speed, sp, acceleration*delta)
 	else:
@@ -108,3 +105,6 @@ func rotate_enemy_gun(degree, delta):
 func find_target(target):	
 	# TO DO	
 	pass
+
+func _on_gun_timer_timeout():
+	pass # replace with function body
