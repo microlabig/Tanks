@@ -40,7 +40,7 @@ __meta__ = {
 }
 acceleration = 0.5
 decceleration = 0.1
-speed = -100
+speed = 100
 bullet = ExtResource( 2 )
 
 [node name="body" type="Sprite" parent="."]
