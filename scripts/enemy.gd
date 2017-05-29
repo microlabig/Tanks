@@ -2,7 +2,7 @@ extends RigidBody2D
 
 export var acceleration = 0.5 #ускорение для движения вперед
 export var decceleration = 0.1 #ускорение для движения назад
-export var speed = -100 #скорость перемещения по-умолчанию (на определенной местности) 
+export var speed = 100 #скорость перемещения по-умолчанию (на определенной местности) 
 export (PackedScene) var bullet #пуля (Node)
 
 onready var bullet_container = get_node("bullet_container")
