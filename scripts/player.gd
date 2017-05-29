@@ -25,9 +25,12 @@ var current_speed = 0
 var current_rot = 0.0
 var rot = 0.0
  
-func _ready():
-        # Initalization here
-        set_fixed_process(true)
+#--------------------------------------------------
+#--------------------------------------------------
+#--------------------------------------------------
+func _ready():        
+	set_fixed_process(true)
+	pass
 
 func _fixed_process( delta ):
 	if Input.is_action_pressed("ui_shoot"):
@@ -49,10 +52,12 @@ func _fixed_process( delta ):
 		move(run_speed*0.5,acceleration,delta)
 	elif move_up.check() == 0 and move_down.check() == 0:
 		move(0,deceleration,delta)
-		
-### apply the speed vector to the velocity     
+		   
 	set_linear_velocity(Vector2(0,current_speed).rotated(get_rot()))
-   
+#--------------------------------------------------
+#--------------------------------------------------
+#--------------------------------------------------   
+
 func move(speed, acceleration, delta):
 	current_speed = lerp(current_speed, speed, acceleration*delta)
 
