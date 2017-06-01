@@ -3,7 +3,6 @@
 [ext_resource path="res://scripts/player_gun.gd" type="Script" id=1]
 [ext_resource path="res://PNG/Tanks/barrelGreen.png" type="Texture" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
@@ -46,6 +45,7 @@ offset = Vector2( -8, -62 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 0, -35.9235 )
 shape = SubResource( 1 )
 trigger = false
