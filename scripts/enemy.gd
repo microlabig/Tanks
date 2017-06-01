@@ -38,7 +38,7 @@ func _fixed_process( delta ):
 	else:
 		pass
 		move_enemy(speed, delta)
-		print("speed= ",abs(speed)-abs(current_speed)," ",current_speed)
+		#print("speed= ",abs(speed)-abs(current_speed)," ",current_speed)
 	pass
 #--------------------------------------------------
 #--------------------------------------------------
