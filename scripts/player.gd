@@ -13,7 +13,7 @@ export var deceleration = 2
 export var rot_degree = 1
  
 export (PackedScene) var bullet
-export (PackedScene) var bullet_mg
+var bullet_mg = preload("res://scenes/player_bullet_mg.tscn")
 
 onready var bullet_container = get_node("bullet_container")
 onready var mg_container = get_node("mg_container")
@@ -67,6 +67,7 @@ func _fixed_process( delta ):
 func move(speed, acceleration, delta):
 	current_speed = lerp(current_speed, speed, acceleration*delta)
 
+#стрельба из пушки
 func shoot():
 	# старт таймера стрельбы
 	gun_timer.start()
@@ -109,6 +110,7 @@ func shoot_mashinegun():
 #	shoot_sound.play("gun")
 	pass
 	
+#поворот игрока
 func rotate_player(degree,delta):
 	current_rot += deg2rad(degree)
 	rot = lerp(rot,current_rot,delta)
