@@ -21,11 +21,11 @@ func check():
 	state_old = output_state
 	
 	if not prev_state and not current_state:
-		output_state = 0 ### Released
+		output_state = 0 ### Released (отпущена)
 	if not prev_state and current_state:
-		output_state = 1 ### Just Pressed
+		output_state = 1 ### Just Pressed (только нажата)
 	if prev_state and current_state:
-		output_state = 2 ### Pressed
+		output_state = 2 ### Pressed ()
 	if prev_state and not current_state:
 		output_state = 3 ### Just Released
 	

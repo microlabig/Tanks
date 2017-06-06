@@ -102,8 +102,19 @@ wait_time = 0.1
 one_shot = true
 autostart = false
 
+[node name="tracks_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.2
+one_shot = true
+autostart = false
+
 [node name="bullet_container" type="Node" parent="."]
 
 [node name="mg_container" type="Node" parent="."]
+
+[node name="tracks_container" type="Node" parent="."]
+
+[connection signal="timeout" from="tracks_timer" to="." method="_on_tracks_timer_timeout"]
 
 

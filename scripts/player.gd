@@ -11,17 +11,23 @@ export var run_speed = 100
 export var acceleration = 1
 export var deceleration = 2
 export var rot_degree = 1
- 
-export (PackedScene) var bullet
-var bullet_mg = preload("res://scenes/player_bullet_mg.tscn")
+
+export (PackedScene) var bullet #сцена пули
+var bullet_mg = preload("res://scenes/player_bullet_mg.tscn") #сцена пули минигана
 
 onready var bullet_container = get_node("bullet_container")
-onready var mg_container = get_node("mg_container")
 onready var gun_timer = get_node("gun_timer")
+
+onready var mg_container = get_node("mg_container")
 onready var machinegun_timer = get_node("machinegun_timer")
 
 #onready var shoot_sound = get_node("shoot")
 var smoke = preload("res://scenes/smoke.tscn")
+
+#следы от движения
+var tracks = preload("res://scenes/track.tscn")
+onready var tracks_timer = get_node("tracks_timer")
+var track_offset = 0
 
 var current_speed = 0
 var current_rot = 0.0
@@ -34,6 +40,7 @@ func _ready():
 	set_fixed_process(true)
 	pass
 
+
 func _fixed_process( delta ):
 	if Input.is_action_pressed("ui_shoot"):
 		if gun_timer.get_time_left() == 0:
@@ -43,6 +50,7 @@ func _fixed_process( delta ):
 		if machinegun_timer.get_time_left() == 0:
 			shoot_mashinegun()
 
+	# поворот танка
 	if move_left.check() == 1 or move_right.check() == 1:
 		rot = get_rot()
 		current_rot = get_rot()
@@ -51,21 +59,37 @@ func _fixed_process( delta ):
 	elif move_right.check() == 2:
 		rotate_player(-rot_degree,delta)
        
-        
+    # движение танка    
 	if move_up.check() == 2:
 		move(-run_speed,acceleration,delta)
+		
 	elif move_down.check() == 2:
 		move(run_speed*0.5,acceleration,delta)
+		
 	elif move_up.check() == 0 and move_down.check() == 0:
 		move(0,deceleration,delta)
-		   
-	set_linear_velocity(Vector2(0,current_speed).rotated(get_rot()))
+	
+	#if current_speed>0:
+	#	track_offset = -38 #размер спрайта танка / 2
+	#elif current_speed<0: 
+	#	track_offset = 38 #размер спрайта танка / 2 	
+	#else:	
+	#	track_offset = 0
+		
+	if Input.is_action_pressed("ui_up") or abs(current_speed)>1.0 or abs(current_rot)>0.5:
+		if tracks_timer.get_time_left() == 0:
+			tracks_timer.start()
+	
+	set_linear_velocity(Vector2(0,current_speed).rotated(get_rot()))		
+	pass
 #--------------------------------------------------
 #--------------------------------------------------
 #--------------------------------------------------   
 
-func move(speed, acceleration, delta):
-	current_speed = lerp(current_speed, speed, acceleration*delta)
+#передвижение
+func move(speed, acceleration, delta):		
+	current_speed = lerp(current_speed, speed, acceleration*delta)	
+	pass
 
 #стрельба из пушки
 func shoot():
@@ -115,3 +139,11 @@ func rotate_player(degree,delta):
 	current_rot += deg2rad(degree)
 	rot = lerp(rot,current_rot,delta)
 	set_rot(rot)
+
+#для следов от движения танка
+func _on_tracks_timer_timeout():
+	var track = tracks.instance()
+	get_node("tracks_container").add_child(track)	
+	track.set_offset()
+	track.start_at(get_rot(), get_pos()	)
+	pass 

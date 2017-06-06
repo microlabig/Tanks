@@ -17,7 +17,6 @@ func _fixed_process(delta):
 	set_pos(get_pos() + vel * delta)
 	pass
 
-
 func _on_lifetime_timeout():
 	queue_free()
 	pass

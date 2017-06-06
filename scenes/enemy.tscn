@@ -65,15 +65,6 @@ gravity_scale = 0.0
 
 transform/pos = Vector2( 0, -73 )
 
-[node name="gun_timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = true
-autostart = false
-
-[node name="bullet_container" type="Node" parent="."]
-
 [node name="j_enemy_gun" type="PinJoint2D" parent="."]
 
 node_a = NodePath("..")
@@ -82,6 +73,26 @@ bias/bias = 0.0
 collision/exclude_nodes = true
 softness = 0.0
 
+[node name="gun_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="tracks_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = true
+
+[node name="bullet_container" type="Node" parent="."]
+
+[node name="tracks_container" type="Node" parent="."]
+
 [connection signal="timeout" from="gun_timer" to="." method="_on_gun_timer_timeout"]
+
+[connection signal="timeout" from="tracks_timer" to="." method="_on_tracks_timer_timeout"]
 
 

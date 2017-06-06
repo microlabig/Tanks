@@ -17,6 +17,11 @@ var linear_damp = 0.0 #для отдачи и отскоков
 
 var target_pos = Vector2()
 
+#следы от движения
+var tracks = preload("res://scenes/track.tscn")
+onready var tracks_timer = get_node("tracks_timer")
+var track_offset = 0
+
 #--------------------------------------------------
 #--------------------------------------------------
 #--------------------------------------------------
@@ -52,7 +57,7 @@ func move_enemy(sp, delta):
 		current_speed = lerp(current_speed, sp, acceleration*delta)
 	else:
 		current_speed = lerp(current_speed, sp/2, decceleration*delta)	
-	set_linear_velocity(Vector2(0,current_speed).rotated(get_rot()))
+	set_linear_velocity(Vector2(0,current_speed).rotated(get_rot()))	
 	pass
 
 #установим линейное торможение 
@@ -106,4 +111,12 @@ func find_target(target):
 	pass
 
 func _on_gun_timer_timeout():
+	pass # replace with function body
+
+
+func _on_tracks_timer_timeout():
+	var track = tracks.instance()
+	get_node("tracks_container").add_child(track)	
+	track.set_offset(track_offset)
+	track.start_at(get_rot(), get_pos()	)
 	pass # replace with function body

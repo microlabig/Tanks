@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://scripts/track.gd" type="Script" id=1]
+[ext_resource path="res://PNG/Tanks/tracksLarge_2.png" type="Texture" id=2]
+
+[node name="track" type="Node2D"]
+
+transform/pos = Vector2( 321.515, 203.716 )
+z/z = -1
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sprite2" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -41, 0 )
+
+[node name="sprite1" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( -41, 0 )
+
+[node name="lifetime" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 10.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]
+
+
