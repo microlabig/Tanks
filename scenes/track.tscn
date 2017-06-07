@@ -27,7 +27,7 @@ offset = Vector2( -41, 0 )
 [node name="lifetime" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 10.0
+wait_time = 2.0
 one_shot = false
 autostart = true
 

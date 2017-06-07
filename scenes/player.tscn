@@ -13,7 +13,7 @@ extents = Vector2( 38.8256, 36.6146 )
 
 [node name="player" type="RigidBody2D"]
 
-transform/pos = Vector2( 414, 271 )
+transform/pos = Vector2( 540.515, 483.219 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )

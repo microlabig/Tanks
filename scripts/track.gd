@@ -16,7 +16,7 @@ func start_at(dir, pos):
 func set_offset():
 	var off1 = get_node("sprite1").get_offset()
 	var off2 = get_node("sprite2").get_offset()
-	off1.y += 38
+	off1.y += 30
 	off2.y -= 40
 	get_node("sprite1").set_offset(off1)
 	get_node("sprite2").set_offset(off2)

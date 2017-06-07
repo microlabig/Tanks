@@ -69,13 +69,6 @@ func _fixed_process( delta ):
 	elif move_up.check() == 0 and move_down.check() == 0:
 		move(0,deceleration,delta)
 	
-	#if current_speed>0:
-	#	track_offset = -38 #размер спрайта танка / 2
-	#elif current_speed<0: 
-	#	track_offset = 38 #размер спрайта танка / 2 	
-	#else:	
-	#	track_offset = 0
-		
 	if Input.is_action_pressed("ui_up") or abs(current_speed)>1.0 or abs(current_rot)>0.5:
 		if tracks_timer.get_time_left() == 0:
 			tracks_timer.start()
@@ -144,6 +137,7 @@ func rotate_player(degree,delta):
 func _on_tracks_timer_timeout():
 	var track = tracks.instance()
 	get_node("tracks_container").add_child(track)	
+	tracks_timer.set_wait_time(0.25-abs(current_speed/run_speed)/10)	
 	track.set_offset()
 	track.start_at(get_rot(), get_pos()	)
 	pass 
